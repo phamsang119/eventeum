@@ -2,7 +2,6 @@ server:
   tomcat:
     uri-encoding: UTF-8
   port: 8060
-
 logging:
   level:
     org.springframework.web: ERROR
@@ -11,12 +10,13 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %c: %M - %m%n"
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %c: %M - %m%n"
-  file: /logs/application.log
+  file:
+    name: /logs/application.log
 
 ethereum:
   nodes:
     - name: default
-      url: http://localhost:8545
+      url: https://bsc-dataseed1.binance.org
       pollingInterval: ${POLLING_INTERVAL:10000}
 
   healthcheck:

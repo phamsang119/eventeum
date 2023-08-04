@@ -31,6 +31,7 @@ import net.consensys.eventeum.model.TransactionMonitoringSpec;
 import net.consensys.eventeum.repository.ContractEventFilterRepository;
 import net.consensys.eventeum.utils.JSON;
 import net.consensys.eventeumserver.integrationtest.utils.SpringRestarter;
+import org.apache.commons.collections4.IterableUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -58,7 +59,6 @@ import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Numeric;
-import wiremock.org.apache.commons.collections4.IterableUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -235,15 +235,15 @@ public class BaseIntegrationTest {
     }
 
     protected List<ContractEventFilter> listEventFilters() {
-	final ResponseEntity<List<ContractEventFilter>> response = restTemplate.exchange(
-		  restUrl + "/api/rest/v1/event-filter",
-		  HttpMethod.GET,
-		  null,
-		  new ParameterizedTypeReference<List<ContractEventFilter>>(){});
+        final ResponseEntity<List<ContractEventFilter>> response = restTemplate.exchange(
+                restUrl + "/api/rest/v1/event-filter",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<ContractEventFilter>>(){});
 
-	List<ContractEventFilter> contractEventFilters = response.getBody();
+        List<ContractEventFilter> contractEventFilters = response.getBody();
 
-	return contractEventFilters;
+        return contractEventFilters;
     }
 
     protected String monitorTransaction(TransactionMonitoringSpec monitorSpec) {

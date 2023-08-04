@@ -29,7 +29,10 @@ import net.consensys.eventeum.model.TransactionMonitoringSpec;
 import net.consensys.eventeum.repository.TransactionMonitoringSpecRepository;
 import net.consensys.eventeum.utils.JSON;
 import net.consensys.eventeumserver.integrationtest.utils.RestartingSpringRunner;
-import org.junit.*;
+import org.apache.commons.collections4.IterableUtils;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +42,6 @@ import org.springframework.test.context.TestPropertySource;
 import org.testcontainers.containers.FixedHostPortGenericContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.web3j.crypto.Hash;
-import wiremock.org.apache.commons.collections4.IterableUtils;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -50,7 +52,8 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@TestPropertySource()
+@TestPropertySource(properties =
+        {"spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration"})
 public abstract class ServiceRestartRecoveryTests extends BaseKafkaIntegrationTest {
     private static final int MONGO_PORT = 27017;
 
